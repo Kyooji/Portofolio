@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --bg: #050a18;
+    --bg-dark: #0a1633;
+    --blue: #1565ff;
+    --electric: #00a8ff;
+    --cyan: #00e5ff;
+    --light-blue: #7dd3fc;
+    --ink: #eaf6ff;
+    --muted: #8ba9c7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "VT323", monospace;
+    font-size: 20px;
+    overflow-x: hidden;
+}
+
+#root {
+    position: relative;
+    z-index: 1;
+}
+
+body::before {
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.2;
+    background-image:
+        linear-gradient(rgba(0, 168, 255, 0.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 168, 255, 0.16) 1px, transparent 1px);
+    background-size: 32px 32px;
+    animation: pixel-drift 18s linear infinite;
+}
+
+body::after {
+    content: "";
+    pointer-events: none;
+    position: fixed;
+    top: 18%;
+    left: 12%;
+    z-index: 0;
+    width: 8px;
+    height: 8px;
+    background: var(--cyan);
+    box-shadow:
+        35vw 18vh 0 var(--electric),
+        70vw 8vh 0 var(--cyan),
+        84vw 62vh 0 var(--electric),
+        22vw 78vh 0 var(--blue);
+    opacity: 0.35;
+    animation: pixel-flicker 5s steps(2, end) infinite;
+}
+
+@keyframes pixel-drift {
+    from {
+        background-position:
+            0 0,
+            0 0;
+    }
+    to {
+        background-position:
+            32px 32px,
+            32px 32px;
+    }
+}
+
+@keyframes pixel-flicker {
+    0%,
+    100% {
+        opacity: 0.18;
+        transform: translate(0, 0);
+    }
+    50% {
+        opacity: 0.42;
+        transform: translate(8px, 12px);
+    }
+}
+
+h1,
+h2,
+h3,
+.font-pixel {
+    font-family: "Press Start 2P", monospace;
+}
+
+section {
+    position: relative;
+}
+
+.hero-retro-bg {
+    isolation: isolate;
+    overflow: hidden;
+    background-color: #241637;
+    background-size: 100% 100%, 64px 64px, 48px 48px, 100% 100%;
+    background-position: center, 0 0, 16px 20px, center;
+    animation: retro-pixel-background 14s steps(6, end) infinite;
+}
+
+.hero-image-frame {
+    position: relative;
+    width: min(100%, 360px);
+    aspect-ratio: 4 / 5;
+    padding: 8px;
+    /* background: rgba(35, 17, 54, 0.9); */
+    transform: rotate(2deg);
+}
+
+.hero-side-image .hero-image-frame {
+    width: min(100%, 220px);
+}
+
+.hero-image-frame::after {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    pointer-events: none;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.15) contrast(1.05);
+}
+
+@keyframes retro-pixel-background {
+    0%,
+    100% {
+        background-position: center, 0 0, 16px 20px, center;
+    }
+    50% {
+        background-position: center, 32px 24px, -12px 36px, center;
+    }
+}
+
+section::after {
+    content: "";
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    bottom: 0;
+    height: 5px;
+    background: var(--electric);
+    clip-path: polygon(
+        0 2px,
+        8px 2px,
+        8px 0,
+        calc(50% - 12px) 0,
+        calc(50% - 12px) 2px,
+        calc(50% + 12px) 2px,
+        calc(50% + 12px) 0,
+        calc(100% - 8px) 0,
+        calc(100% - 8px) 2px,
+        100% 2px,
+        100% 5px,
+        0 5px
+    );
+    opacity: 0.8;
+}
+
+::selection {
+    background: var(--electric);
+    color: var(--bg);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--blue);
+    border: 2px solid var(--bg-dark);
+}
+
+/* ---------- CRT scanline overlay ---------- */
+.crt-overlay {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0px,
+        rgba(0, 0, 0, 0) 2px,
+        rgba(0, 10, 30, 0.18) 3px,
+        rgba(0, 0, 0, 0) 4px
+    );
+    mix-blend-mode: overlay;
+}
+
+.crt-vignette {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 59;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0) 55%,
+        rgba(0, 4, 15, 0.65) 100%
+    );
+}
+
+/* ---------- Pixel border (stepped corners) ---------- */
+.pixel-border {
+    position: relative;
+    border: 2px solid var(--electric);
+    clip-path: polygon(
+        0 8px,
+        8px 8px,
+        8px 0,
+        calc(100% - 8px) 0,
+        calc(100% - 8px) 8px,
+        100% 8px,
+        100% calc(100% - 8px),
+        calc(100% - 8px) calc(100% - 8px),
+        calc(100% - 8px) 100%,
+        8px 100%,
+        8px calc(100% - 8px),
+        0 calc(100% - 8px)
+    );
+}
+
+.pixel-corners-bg {
+    clip-path: polygon(
+        0 8px,
+        8px 8px,
+        8px 0,
+        calc(100% - 8px) 0,
+        calc(100% - 8px) 8px,
+        100% 8px,
+        100% calc(100% - 8px),
+        calc(100% - 8px) calc(100% - 8px),
+        calc(100% - 8px) 100%,
+        8px 100%,
+        8px calc(100% - 8px),
+        0 calc(100% - 8px)
+    );
+}
+
+.text-glow {
+    text-shadow: 0 0 8px rgba(0, 168, 255, 0.7);
+}
+
+.blue-glow {
+    box-shadow: 0 0 16px rgba(0, 168, 255, 0.45);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        font-size: 18px;
+    }
+}
