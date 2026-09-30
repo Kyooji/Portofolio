@@ -45,7 +45,7 @@ src/
 ├── data/         # Sumber data portofolio
 │   ├── profile.js      # Profil RPG, role, bio, tautan medsos
 │   ├── skills.js       # Daftar skill & bar status
-│   ├── projects.js     # Kartu quest/proyek & URL repo
+│   ├── projects.js     # Kartu quest/proyek
 │   └── experience.js   # Riwayat quest/misi
 ├── App.jsx       # Layout utama & loading screen
 └── index.css     # Styling CRT scanline & pixel cursor
