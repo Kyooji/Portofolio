@@ -59,6 +59,6 @@ src/
 
 ## 📬 Hubungi Saya
 
-- **GitHub:** [github.com/username](https://github.com/)
-- **LinkedIn:** [linkedin.com/in/username](https://linkedin.com/)
-- **Email:** your.email@example.com
+- **GitHub:** [github.com/Kyooji](https://github.com/Kyooji)
+- **LinkedIn:** [linkedin.com/in/Hery Sugiharto](https://www.linkedin.com/in/hery-sugiharto-19160626b)
+- **Email:** hery.sugiharto1234@gmail.com
